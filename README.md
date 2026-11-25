@@ -39,9 +39,9 @@ Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
    truth. If they disagree with this prompt, follow them and tell me why.
    Do not invent a different setup.
 3. Inspect the environment: operating system, shell, git, Python, uv,
-   whether setup downloads succeed, and which capabilities you actually have (running
-   commands; reading and writing files; listing, messaging, or creating
-   agent sessions; custom agents). Verify each with read-only or harmless
+   network access as observed during setup, and which capabilities you
+   actually have (running commands; reading and writing files; listing,
+   messaging, or creating agent sessions; custom agents). Verify each with read-only or harmless
    checks; if checking would create a session or send a message, report it
    as untested instead. Do not assume.
 4. Perform "Setup and verification" exactly, including its fallback when uv
