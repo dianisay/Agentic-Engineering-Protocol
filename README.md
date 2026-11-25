@@ -17,11 +17,12 @@ Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
 
 1. Find or get the checkout. Choose the path with the first rule that applies:
    a. the path in the AEP_HOME environment variable, if it is set;
-   b. the current directory or one of its parents, if it is a checkout of
-      this repository;
+   b. the top of the current directory's git checkout
+      ("git rev-parse --show-toplevel"), if it is this repository;
    c. a folder named Agentic-Engineering-Protocol in my home directory.
-   A folder is a checkout of this repository when "git remote get-url origin"
-   names dianisay/Agentic-Engineering-Protocol (HTTPS or SSH, with or without
+   A folder is a checkout of this repository when
+   "git config --get remote.origin.url" names
+   dianisay/Agentic-Engineering-Protocol (HTTPS or SSH, with or without
    .git). Then:
    - Path does not exist: run
      git clone https://github.com/dianisay/Agentic-Engineering-Protocol.git <path>
@@ -38,14 +39,15 @@ Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
    truth. If they disagree with this prompt, follow them and tell me why.
    Do not invent a different setup.
 3. Inspect the environment: operating system, shell, git, Python, uv,
-   network access, and which capabilities you actually have (running
+   whether setup downloads succeed, and which capabilities you actually have (running
    commands; reading and writing files; listing, messaging, or creating
    agent sessions; custom agents). Verify each with read-only or harmless
    checks; if checking would create a session or send a message, report it
    as untested instead. Do not assume.
 4. Perform "Setup and verification" exactly, including its fallback when uv
    is unavailable. Fix ordinary problems yourself when it is safe, such as a
-   missing user-level tool or a broken .venv inside the checkout.
+   missing user-level tool. The checkout's .venv is generated: if setup
+   fails because it is broken, you may delete and recreate it.
 5. Run its verification commands. Setup is complete only if every one
    passes. Never report success for a failed or skipped check.
 6. Report: checkout path and commit; whether you cloned, updated, or reused
@@ -60,8 +62,8 @@ creating credentials; deleting or overwriting existing files; changing an
 existing checkout's branch or local changes; writing outside the checkout
 and user-level tool locations and caches; or choosing which of my projects
 to audit.
-Send nothing to any service except what setup needs (the git host and the
-Python package and tool downloads named in the README).
+Send nothing to any service except what setup needs: the git host, the
+Python Package Index, and uv's installer and Python downloads.
 ```
 
 When setup is done, the agent reports the checkout path and the
@@ -115,8 +117,8 @@ or artifact with any external provider without authorization.
 
 The protocol is a set of Markdown files; nothing runs as a service and
 nothing is installed into your projects. Setup means having a checkout of
-this repository and confirming it is intact with its offline checks. Run
-these commands from the checkout root.
+this repository and confirming it is intact with its offline checks.
+After step 1, run the commands from the checkout root.
 
 1. **Get or update the checkout.** You need `git`.
 
@@ -191,8 +193,8 @@ or take consequential actions until I approve a plan.
 
 If your host supports repository-local custom agents (for example VS Code),
 you can instead open the checkout as a workspace and select the
-**Orchestrator** agent. Continue with the [quick start](#quick-start) after
-the audit.
+**Orchestrator** agent. After the audit, continue with
+[quick start](#quick-start) step 3.
 
 ## Quick start
 
