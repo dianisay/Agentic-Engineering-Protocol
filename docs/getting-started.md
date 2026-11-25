@@ -1,5 +1,9 @@
 # Getting started
 
+If you have no checkout yet, use the
+[copy-paste bootstrap prompt](../README.md#copy-paste-this-prompt-to-get-started)
+or [setup and verification](../README.md#setup-and-verification) first.
+
 1. **Establish authority.** Name the approved workspace and output directory,
    access restrictions, protected artifacts, approval boundaries, compute and
    time limits. Do not assume that a working directory is safe to modify.
