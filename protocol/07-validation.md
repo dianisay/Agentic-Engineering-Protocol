@@ -5,7 +5,8 @@
 Determine whether the exact delivered outcome satisfies its contract, with
 independence proportional to risk and evidence sufficient to reproduce or inspect
 the decision. Worker self-checks are useful inputs, not independent acceptance.
-Use validation and gate records from [templates](../templates/).
+Use the [validation report](../templates/validation-report.md) for gate results
+and the [evidence manifest](../templates/evidence-manifest.md) for claim evidence.
 
 ## Validation boundary and independence
 
