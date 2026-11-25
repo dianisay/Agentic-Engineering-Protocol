@@ -28,9 +28,9 @@ Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
    - Path is a checkout: reuse it; never clone a second copy. Run
      "git fetch origin". If the working tree is clean and the current branch
      is the default branch (origin/HEAD, normally main), run
-     "git pull --ff-only". If it has local
-     changes, is on another branch, or cannot fast-forward, do not reset,
-     stash, discard, or force anything: keep it as it is and report it.
+     "git pull --ff-only". If it has local changes, is on another branch,
+     or cannot fast-forward, do not reset, stash, discard, or force
+     anything: keep it as it is and report it.
    - Path exists but is not a checkout: do not touch it. Use the same name
      with the first free suffix (-2, -3, ...) in the same folder.
 2. Read README.md in the checkout, especially "Setup and verification" and
