@@ -136,8 +136,11 @@ After step 1, run the commands from the checkout root.
 2. **Install the check tools.** Use [uv](https://docs.astral.sh/uv/). If it is
    missing, install it at user level with its
    [official instructions](https://docs.astral.sh/uv/getting-started/installation/).
-   `uv` creates `.venv` inside the checkout and downloads a Python 3.11+
-   interpreter if none is available.
+   To keep the installer from editing shell startup files, set
+   `UV_NO_MODIFY_PATH=1`; then run `uv` from where it was installed (usually
+   `~/.local/bin`) or add that folder to `PATH` yourself. `uv` creates
+   `.venv` inside the checkout and downloads a Python 3.11+ interpreter if
+   none is available.
 
    ```sh
    uv sync --locked
@@ -170,9 +173,9 @@ If `python3` is older than 3.11, use a newer interpreter such as
 administrator rights; installing uv at user level avoids that.
 
 These checks confirm that the files are complete and internally linked. They
-do not test your agent host. Which capabilities your host has (running
-commands, listing, messaging, or creating sessions) is checked when you start,
-as part of the audit.
+do not test your agent host. The bootstrap agent reports the host
+capabilities it can confirm without side effects; the audit then records
+them fully (running commands, listing, messaging, or creating sessions).
 
 ## Start using it
 
