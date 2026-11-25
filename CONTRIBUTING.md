@@ -25,3 +25,28 @@ material without permission.
 For research claims, cite original sources and dates, characterize scope and
 limitations, and avoid asserting that more agents or fewer tokens guarantee
 better results. See [research guidance](docs/research.md).
+
+## Reproducible structural checks
+
+Install Python 3.11 or newer and [uv](https://docs.astral.sh/uv/), then run:
+
+```sh
+uv sync --locked
+uv run --locked python -m unittest discover -s tests -v
+uv run --locked python scripts/check_docs.py
+```
+
+The [checker](scripts/check_docs.py) detects merge conflict markers, empty
+Markdown files, broken local links and heading anchors, and invalid required
+agent YAML fields. It parses CommonMark inline links, images, and resolved
+reference links; heading IDs approximate GitHub's punctuation and duplicate
+heading rules. Raw HTML links/anchors, undefined reference labels, external
+destinations, and renderer-specific extensions are outside its scope.
+It never executes examples or contacts external links. The
+[workflow](.github/workflows/document-checks.yml) runs the same commands on
+pull requests and pushes to `main`.
+
+These are structural checks, not host schema validation, permission checks,
+independent protocol acceptance, or an operational agent trial. Report those
+separately. The [initial validation report](docs/validation.md) is historical,
+not evidence that the current revision passes.
