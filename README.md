@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Agent Orchestration Protocol
 
 A reusable, evidence-driven protocol for coordinating persistent AI agent
@@ -101,3 +102,7 @@ statement alone does not establish a successful engineering result. This
 protocol cannot guarantee correctness, safety, independence, or token savings;
 it makes evidence and decisions inspectable. Human approval is required for
 consequential actions as defined by the project boundary.
+=======
+# Agentic-Engineering-Protocol
+A reusable, evidence-driven protocol for coordinating persistent AI agent sessions through auditing, planning, dependency management, peer-to-peer communication, and independent validation.
+>>>>>>> origin/main
