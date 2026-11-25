@@ -1,5 +1,76 @@
 # Agent Orchestration Protocol
 
+## Copy-Paste This Prompt to Get Started
+
+You do not need to clone or install anything yourself. Copy the prompt below
+into a coding agent that can run terminal commands (for example, a CLI or IDE
+agent with shell access). It finds or downloads this repository, sets it up,
+verifies it, and tells you how to start.
+
+```text
+Set up the Agentic Engineering Protocol on this machine. Actually perform
+every step below with your own tools; do not just explain them to me. Work
+autonomously and stop only for the items under "Ask me first".
+
+Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
+(its README is titled "Agent Orchestration Protocol"; same project)
+
+1. Find or get the checkout. Choose the path with the first rule that applies:
+   a. the path in the AEP_HOME environment variable, if it is set;
+   b. the top of the current directory's git checkout
+      ("git rev-parse --show-toplevel"), if it is this repository;
+   c. a folder named Agentic-Engineering-Protocol in my home directory.
+   A folder is a checkout of this repository when
+   "git config --get remote.origin.url" names
+   dianisay/Agentic-Engineering-Protocol (HTTPS or SSH, with or without
+   .git). Then:
+   - Path does not exist: run
+     git clone https://github.com/dianisay/Agentic-Engineering-Protocol.git <path>
+   - Path is a checkout: reuse it; never clone a second copy. Run
+     "git fetch origin". If the working tree is clean and the current branch
+     is the default branch (origin/HEAD, normally main), run
+     "git pull --ff-only". If it has local changes, is on another branch,
+     or cannot fast-forward, do not reset, stash, discard, or force
+     anything: keep it as it is and report it.
+   - Path exists but is not a checkout: do not touch it. Use the same name
+     with the first free suffix (-2, -3, ...) in the same folder.
+2. Read README.md in the checkout, especially "Setup and verification" and
+   "Start using it", and the documents they link to. They are the source of
+   truth. If they disagree with this prompt, follow them and tell me why.
+   Do not invent a different setup.
+3. Inspect the environment: operating system, shell, git, Python, uv,
+   network access as observed during setup, and which capabilities you
+   actually have (running commands; reading and writing files; listing,
+   messaging, or creating agent sessions; custom agents). Verify each with
+   read-only or harmless checks; if checking would create a session or send
+   a message, report it as untested instead. Do not assume.
+4. Perform "Setup and verification" exactly, including its fallback when uv
+   is unavailable. Fix ordinary problems yourself when it is safe, such as a
+   missing user-level tool. The checkout's .venv is generated: if setup
+   fails because it is broken, you may delete and recreate it.
+5. Run its verification commands. Setup is complete only if every one
+   passes. Never report success for a failed or skipped check.
+6. Report: checkout path and commit; whether you cloned, updated, or reused
+   it and anything you left untouched; what you installed; each command and
+   its result; verified and unavailable capabilities; anything I must do.
+   Then tell me the protocol is ready and give me the first prompt from
+   "Start using it", with the checkout path filled in, and ask me which
+   project folder and output folder to use for the other placeholders.
+
+Ask me first before: using administrator or sudo rights; entering or
+creating credentials; deleting or overwriting existing files; changing an
+existing checkout's branch or local changes; writing outside the checkout
+and user-level tool locations and caches; or choosing which of my projects
+to audit.
+Send nothing to any service except what setup needs: the git host, the
+Python Package Index, and uv's installer and Python downloads.
+```
+
+When setup is done, the agent reports the checkout path and the
+[first prompt](#start-using-it) to use. Re-running the prompt reuses an
+existing checkout, updating it when that is safe, instead of downloading
+another copy; local changes are never discarded.
+
 A reusable, evidence-driven protocol for coordinating persistent AI agent
 sessions through auditing, planning, dependency management, peer-to-peer
 communication, and independent validation.
@@ -31,7 +102,9 @@ scope or write another worker's artifacts.
    supply role instructions; they do **not** install tools or enforce a security
    sandbox.
 
-Clone or copy this repository to a location you control. Open it in your
+The [bootstrap prompt](#copy-paste-this-prompt-to-get-started) obtains and
+verifies a checkout for you; to do it by hand, follow
+[setup and verification](#setup-and-verification). Open the checkout in your
 assistant host. If your host supports repository-local custom agents, select
 one of the roles in [.github/agents](.github/agents/); consult your host's
 documentation to configure available tools. The
@@ -40,6 +113,92 @@ explains how to check tool access and use a manual fallback. Otherwise, copy
 the relevant role instructions into a chat. Never change private editor
 internals to expose tools. Do not share a private project, session transcript,
 or artifact with any external provider without authorization.
+
+## Setup and verification
+
+The protocol is a set of Markdown files; nothing runs as a service and
+nothing is installed into your projects. Setup means having a checkout of
+this repository and confirming it is intact with its offline checks.
+After step 1, run the commands from the checkout root.
+
+1. **Get or update the checkout.** You need `git`.
+
+   ```sh
+   git clone https://github.com/dianisay/Agentic-Engineering-Protocol.git
+   cd Agentic-Engineering-Protocol
+   ```
+
+   Any folder works; the bootstrap prompt defaults to
+   `Agentic-Engineering-Protocol` in your home directory. For an existing
+   clean checkout on the default branch, update it instead with
+   `git pull --ff-only`. Do not reset or discard local changes to
+   update.
+2. **Install the check tools.** Use [uv](https://docs.astral.sh/uv/). If it is
+   missing, install it at user level with its
+   [official instructions](https://docs.astral.sh/uv/getting-started/installation/).
+   To keep the installer from editing shell startup files, set
+   `UV_NO_MODIFY_PATH=1`; then run `uv` from where it was installed (usually
+   `~/.local/bin`) or add that folder to `PATH` yourself. `uv` creates
+   `.venv` inside the checkout and downloads a Python 3.11+ interpreter if
+   none is available.
+
+   ```sh
+   uv sync --locked
+   ```
+
+3. **Verify.** Both commands must succeed:
+
+   ```sh
+   uv run --locked python -m unittest discover -s tests
+   uv run --locked python scripts/check_docs.py
+   ```
+
+   Expected: the tests end with `OK`, and the checker reports
+   `Checked <N> Markdown files and 5 agent headers; 0 errors.`
+
+**Fallback without uv** (requires Python 3.11 or newer; the package versions
+match [pyproject.toml](pyproject.toml)):
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install "markdown-it-py>=3.0,<5" "PyYAML>=6.0.3,<7"
+.venv/bin/python -m unittest discover -s tests
+.venv/bin/python scripts/check_docs.py
+```
+
+If `python3` is older than 3.11, use a newer interpreter such as
+`python3.12`. On Windows, use `py -3` instead of `python3`, and
+`.venv\Scripts\python` instead of `.venv/bin/python`. On Debian or Ubuntu,
+`venv` may need the `python3-venv` system package, which requires
+administrator rights; installing uv at user level avoids that.
+
+These checks confirm that the files are complete and internally linked. They
+do not test your agent host. The bootstrap agent reports the host
+capabilities it can confirm without side effects; the audit then records
+them fully (running commands, listing, messaging, or creating sessions).
+
+## Start using it
+
+Paste this prompt into your agent, replacing the placeholders. `<AEP_PATH>`
+is the checkout path reported by setup. `<WORKSPACE_ROOT>` is the project
+folder you want coordinated. `<OUTPUT_DIRECTORY>` is a folder where planning
+records may be written, outside protected work.
+
+```text
+Use the Agentic Engineering Protocol in <AEP_PATH>. Read its README.md and
+act as its Orchestrator, as defined in
+<AEP_PATH>/.github/agents/orchestrator.agent.md. Audit <WORKSPACE_ROOT>
+following <AEP_PATH>/protocol/01-audit.md: discover existing projects,
+sessions, evidence, and the session capabilities you actually have. Do not
+modify existing work. Write records only under <OUTPUT_DIRECTORY>, using the
+templates in <AEP_PATH>/templates/. Record unknowns. Do not start workers
+or take consequential actions until I approve a plan.
+```
+
+If your host supports repository-local custom agents (for example VS Code),
+you can instead open the checkout as a workspace and select the
+**Orchestrator** agent. After the audit, continue with
+[quick start](#quick-start) step 3.
 
 ## Quick start
 

@@ -28,13 +28,9 @@ better results. See [research guidance](docs/research.md).
 
 ## Reproducible structural checks
 
-Install Python 3.11 or newer and [uv](https://docs.astral.sh/uv/), then run:
-
-```sh
-uv sync --locked
-uv run --locked python -m unittest discover -s tests -v
-uv run --locked python scripts/check_docs.py
-```
+Run the commands in
+[setup and verification](README.md#setup-and-verification) before submitting
+a change; add `-v` to the unittest command for per-test output.
 
 The [checker](scripts/check_docs.py) detects merge conflict markers, empty
 Markdown files, broken local links and heading anchors, and invalid required
