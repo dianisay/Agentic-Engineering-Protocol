@@ -1,5 +1,11 @@
 # Initial validation report
 
+**Historical scope:** initial release content in commit `17216a8`, before
+remote publication. The original checks below were not preserved as executable
+tooling and do not establish results for later revisions. Use the
+[current structural checks](../CONTRIBUTING.md#reproducible-structural-checks)
+and record their exact revision and output for a new assessment.
+
 This report describes checks of the initial local, Markdown-only framework.
 It is a source-level validation, not an operational certification or an
 independent end-to-end trial. The checks and limitations below are specific to
@@ -73,5 +79,6 @@ an observed usability test with a new user.
 - Review copyright ownership, third-party terms, and the proposed license
   before any publication. Publication is not authorized by this report.
 
-The repository was created locally without a remote, commit, or publication.
+At the time of this initial local assessment, the repository had no remote,
+commit, or publication.
 The framework task did not modify the existing projects it was derived from.
