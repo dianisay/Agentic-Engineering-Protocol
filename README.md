@@ -13,6 +13,7 @@ every step below with your own tools; do not just explain them to me. Work
 autonomously and stop only for the items under "Ask me first".
 
 Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
+(its README is titled "Agent Orchestration Protocol"; same project)
 
 1. Find or get the checkout. Choose the path with the first rule that applies:
    a. the path in the AEP_HOME environment variable, if it is set;
@@ -26,7 +27,8 @@ Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
      git clone https://github.com/dianisay/Agentic-Engineering-Protocol.git <path>
    - Path is a checkout: reuse it; never clone a second copy. Run
      "git fetch origin". If the working tree is clean and the current branch
-     is the default branch, run "git pull --ff-only". If it has local
+     is the default branch (origin/HEAD, normally main), run
+     "git pull --ff-only". If it has local
      changes, is on another branch, or cannot fast-forward, do not reset,
      stash, discard, or force anything: keep it as it is and report it.
    - Path exists but is not a checkout: do not touch it. Use the same name
@@ -38,7 +40,9 @@ Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
 3. Inspect the environment: operating system, shell, git, Python, uv,
    network access, and which capabilities you actually have (running
    commands; reading and writing files; listing, messaging, or creating
-   agent sessions; custom agents). Verify each; do not assume.
+   agent sessions; custom agents). Verify each with read-only or harmless
+   checks; if checking would create a session or send a message, report it
+   as untested instead. Do not assume.
 4. Perform "Setup and verification" exactly, including its fallback when uv
    is unavailable. Fix ordinary problems yourself when it is safe, such as a
    missing user-level tool or a broken .venv inside the checkout.
@@ -48,12 +52,14 @@ Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
    it and anything you left untouched; what you installed; each command and
    its result; verified and unavailable capabilities; anything I must do.
    Then tell me the protocol is ready and give me the first prompt from
-   "Start using it", with the checkout path filled in.
+   "Start using it", with the checkout path filled in, and ask me which
+   project folder and output folder to use for the other placeholders.
 
 Ask me first before: using administrator or sudo rights; entering or
 creating credentials; deleting or overwriting existing files; changing an
 existing checkout's branch or local changes; writing outside the checkout
-and user-level tool locations; or choosing which of my projects to audit.
+and user-level tool locations and caches; or choosing which of my projects
+to audit.
 Send nothing to any service except what setup needs (the git host and the
 Python package and tool downloads named in the README).
 ```
@@ -119,8 +125,10 @@ these commands from the checkout root.
    cd Agentic-Engineering-Protocol
    ```
 
-   For an existing clean checkout on the default branch, update it instead
-   with `git pull --ff-only`. Do not reset or discard local changes to
+   Any folder works; the bootstrap prompt defaults to
+   `Agentic-Engineering-Protocol` in your home directory. For an existing
+   clean checkout on the default branch, update it instead with
+   `git pull --ff-only`. Do not reset or discard local changes to
    update.
 2. **Install the check tools.** Use [uv](https://docs.astral.sh/uv/). If it is
    missing, install it at user level with its
@@ -152,8 +160,11 @@ python3 -m venv .venv
 .venv/bin/python scripts/check_docs.py
 ```
 
-On Windows, use `py -3` instead of `python3`, and
-`.venv\Scripts\python` instead of `.venv/bin/python`.
+If `python3` is older than 3.11, use a newer interpreter such as
+`python3.12`. On Windows, use `py -3` instead of `python3`, and
+`.venv\Scripts\python` instead of `.venv/bin/python`. On Debian or Ubuntu,
+`venv` may need the `python3-venv` system package, which requires
+administrator rights; installing uv at user level avoids that.
 
 These checks confirm that the files are complete and internally linked. They
 do not test your agent host. Which capabilities your host has (running
