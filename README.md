@@ -41,9 +41,9 @@ Repository: https://github.com/dianisay/Agentic-Engineering-Protocol
 3. Inspect the environment: operating system, shell, git, Python, uv,
    network access as observed during setup, and which capabilities you
    actually have (running commands; reading and writing files; listing,
-   messaging, or creating agent sessions; custom agents). Verify each with read-only or harmless
-   checks; if checking would create a session or send a message, report it
-   as untested instead. Do not assume.
+   messaging, or creating agent sessions; custom agents). Verify each with
+   read-only or harmless checks; if checking would create a session or send
+   a message, report it as untested instead. Do not assume.
 4. Perform "Setup and verification" exactly, including its fallback when uv
    is unavailable. Fix ordinary problems yourself when it is safe, such as a
    missing user-level tool. The checkout's .venv is generated: if setup
@@ -67,8 +67,9 @@ Python Package Index, and uv's installer and Python downloads.
 ```
 
 When setup is done, the agent reports the checkout path and the
-[first prompt](#start-using-it) to use. Re-running the prompt updates an
-existing checkout instead of downloading another copy.
+[first prompt](#start-using-it) to use. Re-running the prompt reuses an
+existing checkout, updating it when that is safe, instead of downloading
+another copy; local changes are never discarded.
 
 A reusable, evidence-driven protocol for coordinating persistent AI agent
 sessions through auditing, planning, dependency management, peer-to-peer
