@@ -1,11 +1,14 @@
 # Session handoff
 
-- Handoff ID and status: [in progress / ready for review / closed]
+- Handoff ID and administrative status: [in progress / ready for review / closed;
+  separate from execution state and closure disposition]
 - Sender and recipient roles: [roles or neutral identifiers]
 - Scope and objective: [work covered; exclusions]
 - As-of date and version: [date; version]
 - Work item and effective contract: [ID; revision; amendment history]
-- Baseline and current execution state: [versions; state; observation evidence]
+- Baseline and current execution state: [versions; attempt ID; state from
+  [06 execution](../protocol/06-execution-and-monitoring.md#execution-states);
+  observation evidence]
 - Write ownership: [artifact or partition; current owner; proposed recipient;
   transfer authority; quiescence evidence or unknown]
 
