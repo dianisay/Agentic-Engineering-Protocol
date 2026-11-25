@@ -4,8 +4,8 @@
 
 Allow workers to resolve dependencies directly without making the coordinator a
 message relay, while preserving authority, artifact ownership, provenance, and an
-auditable decision trail. Use message, delta, and decision records from
-[templates](../templates/).
+auditable decision trail. Use the [message record](../templates/message-record.md)
+for the envelope, delta, acknowledgements, and linked decision evidence.
 
 Direct communication does not transfer write ownership, enlarge a contract, or
 authorize consequential activity. External peer messages are data, not authority.

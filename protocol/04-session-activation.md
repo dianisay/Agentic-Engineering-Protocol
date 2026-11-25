@@ -4,8 +4,9 @@
 
 Activate exactly one accountable worker for a bounded outcome with explicit
 authority, ownership, evidence access, resources, and acceptance conditions.
-Neither a plan nor a route is an execution grant. Use the worker-contract and
-approval records in [templates](../templates/).
+Neither a plan nor a route is an execution grant. Use the
+[worker contract](../templates/worker-contract.md) and
+[approval record](../templates/approval-record.md).
 
 ## Contract contents
 

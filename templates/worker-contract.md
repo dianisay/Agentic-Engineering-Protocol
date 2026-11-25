@@ -50,16 +50,24 @@
 ## Budgets, gates, and stop rules
 
 - Budget and accounting: [time, compute, spend, calls, or other resources; limits]
+- Attempt and aggregate bounds: [per-attempt ceiling; retry cap/backoff; maximum
+  concurrency; validation/recovery reserves; accounting uncertainty]
+- Monitoring: [named operator; events/thresholds; verified mechanism or human
+  checkpoint schedule; lifetime; action on lost monitoring]
 - Entry conditions: [authorized inputs, dependencies, and approvals]
 - Review and completion gate: [criteria; evidence; reviewer; decision authority]
 - Stop or pause immediately on: [boundary breach, approval gap, budget limit,
   unsafe result, conflicting input, or task-specific conditions]
 - On stop: [preserve state and evidence; notify authorized role; do not expand
   scope or resume without required approval]
+- Preauthorized safe-stop procedure: [permitted pause/cancellation steps;
+  quiescence verification; in-flight effects; ownership transfer reference]
 - Failure or blocked path: [report, escalation, and permitted fallback]
 
 ## Agreement and changes
 
 - Sponsor authorization: [role; decision; date or pending]
 - Worker acknowledgment: [role; date or pending]
+- Effective activation: [coordinator; revision; time; ownership assignment;
+  monitoring registration; pending until handshake completes]
 - Changes to scope, budget, authority, or criteria: [approval process and log]

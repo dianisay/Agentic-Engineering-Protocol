@@ -26,3 +26,7 @@ publication decision. **Budget and stop:** owner sets resource limits before
 activation; stop on missing data, changed scope, or unauthorized disclosure.
 Use [the master plan template](../../templates/master-plan.md) and
 [worker contract](../../templates/worker-contract.md) for a real plan.
+
+The [fictional continuation](sample-contract.md) assumes these missing inputs
+and decisions have been resolved. It supplies an illustrative owner-selected
+threshold and bounded approval, not a result or permission for actual work.
